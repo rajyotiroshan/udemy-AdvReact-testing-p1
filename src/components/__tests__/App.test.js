@@ -5,8 +5,14 @@ import App from 'components/App';
 import CommentBox from 'components/CommentBox';
 import CommentList from 'components/CommentList';
 
+let wrapped;
+
+beforeEach(()=>{
+    wrapped = shallow(<App/>);//return a component with new function on it.that a new wrapped component.
+
+});
+
 it('shows a comment box', ()=> {
-    const div = document.createElement('div');
     
 /*     ReactDOM.render(<App/>, div);
 
@@ -22,8 +28,6 @@ it('shows a comment box', ()=> {
     ReactDOM.unmountComponentAtNode(div); */
 
     //using shallow
-
-    const wrapped = shallow(<App/>);//return a component with new function on it.that a new wrapped component.
     
     expect(wrapped.find(CommentBox).length).toEqual(1);
 });
@@ -31,7 +35,6 @@ it('shows a comment box', ()=> {
 //test for App compoenent have an instance of CommentList Component.
 
 it('shows a CommentList', ()=>{
-    const wrapper = shallow(<App/>);
-    expect(wrapper.find(CommentList).length).toEqual(1);
+    expect(wrapped.find(CommentList).length).toEqual(1);
 });
 
