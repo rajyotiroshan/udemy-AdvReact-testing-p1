@@ -3,6 +3,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import App from '../App';
 import CommentBox from '../CommentBox';
+import CommentList from '../CommentList';
 
 it('shows a comment box', ()=> {
     const div = document.createElement('div');
@@ -25,5 +26,12 @@ it('shows a comment box', ()=> {
     const wrapped = shallow(<App/>);//return a component with new function on it.that a new wrapped component.
     
     expect(wrapped.find(CommentBox).length).toEqual(1);
+});
+
+//test for App compoenent have an instance of CommentList Component.
+
+it('shows a CommentList', ()=>{
+    const wrapper = shallow(<App/>);
+    expect(wrapper.find(CommentList).length).toEqual(1);
 });
 
