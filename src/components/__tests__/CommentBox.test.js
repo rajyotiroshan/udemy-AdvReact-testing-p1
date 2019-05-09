@@ -24,44 +24,43 @@ it('has a textarea and a button', ()=> {
     expect(wrapped.find('button').length).toEqual(1);
 });
 
+describe('the text area', ()=>{
+    beforeEach(()=>{
+        wrapped.find('textarea')//1. ref to textarea.
+        .simulate('change', {//2. simulate a change event
+            target: {value: 'new Comment'} //3.fake event object:: merge with the event object passed to the handler.
+        }); 
+        
+        wrapped.update();//4.force update the        
+    })
+    it(' has a textarea that user can typed in', ()=>{ 
+        expect(
+            wrapped.find('textarea')//find textarea ref
+            .prop('value')//access it's value prop
+            ).toEqual('new Comment');
+        
+    });
 
-it(' has a textarea that user can typed in', ()=>{
+    it('textarea get emptied on form submit', ()=> {
+        //ref to form
+        //simulate submit event ,no need to pass any fake event object
+        // no dependency on event object inside submit handler.
+        //force update component
+        //ref to textarea
+        //access value prop for textarea
+        //expect it to equal empty string.
 
-    wrapped.find('textarea')//1. ref to textarea.
-    .simulate('change', {//2. simulate a change event
-        target: {value: 'new Comment'} //3.fake event object:: merge with the event object passed to the handler.
-    }); 
-    
-    wrapped.update();//4.force update the
-    
-    expect(
-        wrapped.find('textarea')//find textarea ref
-        .prop('value')//access it's value prop
-        ).toEqual('new Comment');
-    
+        //first simulate change evt on textarea with a value
+        //now textarea have value as ''new Comment'
+        wrapped.find('form')
+        .simulate('submit');
+
+        wrapped.update();
+
+        expect(wrapped.find('textarea').prop('value')).toEqual('');
+    });  
 });
 
-it('textarea get emptied on form submit', ()=> {
-    //ref to form
-    //simulate submit event ,no need to pass any fake event object
-    // no dependency on event object inside submit handler.
-    //force update component
-    //ref to textarea
-    //access value prop for textarea
-    //expect it to equal empty string.
 
-    //first simulate change evt on textarea with a value
-    wrapped.find('textarea').simulate('change', {target: {value: 'new Comment'}});
-    wrapped.update();
-    expect(wrapped.find('textarea').prop('value')).toEqual('new Comment');
-
-    //now textarea have value as ''new Comment'
-    wrapped.find('form')
-    .simulate('submit');
-
-    wrapped.update();
-
-    expect(wrapped.find('textarea').prop('value')).toEqual('');
-});
 
 
